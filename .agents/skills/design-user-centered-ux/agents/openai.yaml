@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design User-Centered UX"
-  short_description: "Design clear, ethical, resilient user flows"
-  default_prompt: "Use $design-user-centered-ux to design this experience around the user task, cognition, feedback, recovery, and accessibility."

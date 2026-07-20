@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anti-Slop"
+  short_description: "Create specific, truthful, complete UI work"
+  default_prompt: "Use $anti-slop to assess and improve this UI so it is specific, truthful, complete, tested, and owned."

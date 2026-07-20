@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO"
+  short_description: "Improve search and answer-engine discovery"
+  default_prompt: "Use $seo to improve this public content for search eligibility, answerability, trust, and measurable discovery."

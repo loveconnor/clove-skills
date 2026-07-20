@@ -1,4 +1,0 @@
-interface:
-  display_name: "Design SVG Icons"
-  short_description: "Design and ship clean, accessible SVG icons"
-  default_prompt: "Use $design-svg-icons to design and implement a clean, accessible icon set for this interface."

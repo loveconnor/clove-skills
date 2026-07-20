@@ -294,7 +294,7 @@ export function CloveExperience() {
           <div className="context-number-mobile" data-mobile-reveal>09</div>
           <div className="context-underlay" aria-hidden="true"><TechnicalGrid /></div>
           <div className="context-fragments" aria-hidden="true">
-            <code>$design-user-centered-ux</code>
+            <code>$ux</code>
             <code>[design / content / discovery / code]</code>
             <code>standard = specific + truthful + owned</code>
           </div>

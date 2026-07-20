@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build Color Systems"
-  short_description: "Create semantic, accessible color systems"
-  default_prompt: "Use $build-color-systems to design and verify a semantic palette, themes, states, and accessible color pairings."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build Typography Systems"
-  short_description: "Create readable, expressive typography systems"
-  default_prompt: "Use $build-typography-systems to define and verify the typography for this product across content, devices, and languages."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clean Code"
+  short_description: "Build correct, readable, operable software"
+  default_prompt: "Use $clean-code to implement or review this change for correctness, clarity, testing, security, and operations."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ADHD"
+  short_description: "Parallel divergent ideation for hard decisions"
+  default_prompt: "Use $adhd to explore this problem through isolated cognitive frames, then converge on the strongest options."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Color"
+  short_description: "Create semantic, accessible color systems"
+  default_prompt: "Use $color to design and verify a semantic palette, themes, states, and accessible color pairings."

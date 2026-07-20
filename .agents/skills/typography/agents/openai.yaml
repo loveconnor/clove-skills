@@ -1,0 +1,4 @@
+interface:
+  display_name: "Typography"
+  short_description: "Create readable, expressive typography systems"
+  default_prompt: "Use $typography to define and verify the typography for this product across content, devices, and languages."

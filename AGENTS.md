@@ -32,7 +32,23 @@ Do not silently invent missing product facts or user intent. If any part of the 
 
 ## Skill router
 
-### `$avoid-ai-design-slop`
+### `$adhd`
+
+Use for deliberate divergent ideation when several materially different solutions could be valid and choosing the obvious solution carries meaningful cost.
+
+Load it immediately when the user explicitly requests `/adhd`, “ADHD mode,” or the `$adhd` skill.
+
+Without explicit invocation, load it only when all of these are true:
+
+- the problem is genuinely open-ended;
+- the decision is consequential enough to justify multi-agent exploration;
+- the user has not requested a quick, standard, canonical, textbook, or single answer.
+
+Use it for unsettled architecture, public APIs, product direction, naming, schema design, creative concepts, or debugging without a known root cause. Do not use it for lookups, syntax questions, routine implementation, or bugs whose cause is already established.
+
+When loaded, the skill may spawn isolated sub-agents for divergent and focus work. Preserve branch isolation and use only the concurrency available in the current environment.
+
+### `$anti-slop`
 
 Use for all substantial UI creation, redesign, generated design, design review, or AI-assisted product work. It prevents generic, fabricated, incomplete, unverified, inaccessible, or unowned output.
 
@@ -43,49 +59,49 @@ Trigger it when the request includes:
 - a request to make work less generic, less “AI-looking,” more intentional, or more complete;
 - an audit of polish that may hide missing product logic or states.
 
-### `$design-user-centered-ux`
+### `$ux`
 
 Use for flows, navigation, forms, onboarding, settings, dashboards, task models, information architecture, interaction behavior, errors, recovery, feedback, accessibility, ethics, or UX audits.
 
 Trigger it whenever a change affects what a person must understand, decide, remember, enter, find, or complete.
 
-### `$write-clear-readable-content`
+### `$clear-writing`
 
 Use for assistant replies, conversational voice, UX copy, headings, labels, buttons, instructions, errors, onboarding, help, documentation, policy, legal, health, marketing, forms, inclusive language, cognitive accessibility, localization-ready content, or content audits.
 
 Trigger it whenever words are created, edited, evaluated, localized, or generated.
 
-### `$craft-design-look-and-feel`
+### `$craft`
 
 Use for visual direction, composition, hierarchy, spacing, density, imagery, iconography, interaction quality, motion, component styling, design critique, redesign, and polish.
 
 Trigger it when the task asks how something should look or feel, or why an interface feels generic, off, unbalanced, inconsistent, or untrustworthy.
 
-### `$build-typography-systems`
+### `$typography`
 
 Use for font selection, type roles, body settings, hierarchy, responsive type, labels, forms, tables, data, code, multilingual fonts, variable fonts, font loading, or typography accessibility.
 
 Trigger it whenever typography choices or implementation materially affect the result.
 
-### `$build-color-systems`
+### `$color`
 
 Use for palettes, semantic color roles, tokens, brand-to-UI mapping, contrast, focus, interaction and status states, light/dark themes, forced colors, charts, color-vision resilience, migration, or palette audits.
 
 Trigger it whenever colors are created, changed, systematized, or evaluated.
 
-### `$create-creative-web-design`
+### `$creative-web`
 
 Use for expressive landing pages, portfolios, campaigns, editorial stories, interactive narratives, unconventional layouts, art direction, motion, scroll experiences, spatial interfaces, 3D, canvas, SVG, WebGL, or memorable brand moments.
 
 Trigger it when distinctiveness, novelty, immersion, or creative technology is a core goal.
 
-### `$optimize-seo-aeo`
+### `$seo`
 
 Use for any public discovery-dependent page or site involving content strategy, search intent, metadata, information architecture, internal links, crawl/render/index behavior, canonicals, sitemaps, structured data, entity clarity, answer engines, AI crawler controls, Core Web Vitals, or search measurement.
 
 Trigger it whenever public web content should be found, understood, quoted, cited, recommended, or acted on through search or generative answers.
 
-### `$write-clean-maintainable-code`
+### `$clean-code`
 
 Use for every meaningful implementation, refactor, review, API, data model, dependency, test, error path, concurrency change, migration, performance change, security change, configuration, feature flag, observability, or AI-generated code integration.
 
@@ -99,35 +115,35 @@ Use these bundles as defaults, then adjust to the actual scope.
 
 Load:
 
-1. `$avoid-ai-design-slop`
-2. `$design-user-centered-ux`
-3. `$craft-design-look-and-feel`
-4. `$write-clear-readable-content`
-5. `$build-typography-systems`
-6. `$build-color-systems`
-7. `$write-clean-maintainable-code`
+1. `$anti-slop`
+2. `$ux`
+3. `$craft`
+4. `$clear-writing`
+5. `$typography`
+6. `$color`
+7. `$clean-code`
 
-Also load `$optimize-seo-aeo` for public pages and `$create-creative-web-design` when expressive concept or creative technology is central.
+Also load `$seo` for public pages and `$creative-web` when expressive concept or creative technology is central.
 
 ### Design or repair a flow
 
-Load `$design-user-centered-ux`, `$write-clear-readable-content`, `$avoid-ai-design-slop`, and `$write-clean-maintainable-code`. Add visual-system skills when the change affects presentation.
+Load `$ux`, `$clear-writing`, `$anti-slop`, and `$clean-code`. Add visual-system skills when the change affects presentation.
 
 ### Create or revise public content
 
-Load `$write-clear-readable-content` and `$optimize-seo-aeo`. Add `$craft-design-look-and-feel`, `$build-typography-systems`, `$build-color-systems`, and `$avoid-ai-design-slop` when designing the page.
+Load `$clear-writing` and `$seo`. Add `$craft`, `$typography`, `$color`, and `$anti-slop` when designing the page.
 
 ### Create a visual system or polish an interface
 
-Load `$craft-design-look-and-feel`, `$build-typography-systems`, `$build-color-systems`, `$design-user-centered-ux`, and `$avoid-ai-design-slop`. Add `$write-clean-maintainable-code` for implementation.
+Load `$craft`, `$typography`, `$color`, `$ux`, and `$anti-slop`. Add `$clean-code` for implementation.
 
 ### Build an expressive web experience
 
-Load `$create-creative-web-design`, `$craft-design-look-and-feel`, `$design-user-centered-ux`, `$avoid-ai-design-slop`, and `$write-clean-maintainable-code`. Add the content, typography, color, and SEO/AEO skills as the work requires.
+Load `$creative-web`, `$craft`, `$ux`, `$anti-slop`, and `$clean-code`. Add the content, typography, color, and SEO/AEO skills as the work requires.
 
 ### Implement, refactor, or review code
 
-Load `$write-clean-maintainable-code`. Also load the domain skill for the behavior being changed; clean code cannot compensate for incorrect product, content, visual, accessibility, or discovery decisions.
+Load `$clean-code`. Also load the domain skill for the behavior being changed; clean code cannot compensate for incorrect product, content, visual, accessibility, or discovery decisions.
 
 ### Audit a product or page
 
@@ -137,7 +153,7 @@ Load every skill for the dimensions being reviewed. Report evidence, user impact
 
 Shared understanding is a prerequisite for action. When the request, context, or desired result is not explicit, pause the affected work and ask. A plausible guess is still a guess.
 
-Read `.agents/skills/write-clear-readable-content/references/clarifying-questions.md` when a task is underspecified, terms conflict, several interpretations are reasonable, a question is difficult to frame, or the consequences of misunderstanding are significant.
+Read `.agents/skills/clear-writing/references/clarifying-questions.md` when a task is underspecified, terms conflict, several interpretations are reasonable, a question is difficult to frame, or the consequences of misunderstanding are significant.
 
 ### Apply the clarification gate
 

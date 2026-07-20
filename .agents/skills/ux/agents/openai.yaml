@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX"
+  short_description: "Design clear, ethical, resilient user flows"
+  default_prompt: "Use $ux to design this experience around the user task, cognition, feedback, recovery, and accessibility."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Craft Design Look and Feel"
-  short_description: "Create coherent, fitting, distinctive interfaces"
-  default_prompt: "Use $craft-design-look-and-feel to establish and refine a coherent visual and interaction direction for this interface."

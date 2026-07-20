@@ -1,0 +1,4 @@
+interface:
+  display_name: "Creative Web"
+  short_description: "Build distinctive, usable creative web experiences"
+  default_prompt: "Use $creative-web to create a concept-driven web experience with accessible, performant expression."

@@ -20,15 +20,15 @@ Each skill lives in its own directory under [`.agents/skills`](.agents/skills). 
 
 ## Available skills
 
-- [`avoid-ai-design-slop`](.agents/skills/avoid-ai-design-slop) — prevent generic, fabricated, incomplete, or inaccessible AI-assisted product work.
-- [`build-color-systems`](.agents/skills/build-color-systems) — design and audit semantic color systems, themes, states, charts, and contrast.
-- [`build-typography-systems`](.agents/skills/build-typography-systems) — choose and implement readable, expressive, accessible typography systems.
-- [`craft-design-look-and-feel`](.agents/skills/craft-design-look-and-feel) — refine visual hierarchy, composition, spacing, interaction quality, and polish.
-- [`create-creative-web-design`](.agents/skills/create-creative-web-design) — build distinctive expressive web experiences and interactive narratives.
-- [`design-user-centered-ux`](.agents/skills/design-user-centered-ux) — design flows and interactions around user goals, comprehension, accessibility, and recovery.
-- [`optimize-seo-aeo`](.agents/skills/optimize-seo-aeo) — improve public-web discovery, structured content, and answer-engine visibility.
-- [`write-clean-maintainable-code`](.agents/skills/write-clean-maintainable-code) — implement and review correct, secure, testable, diagnosable code.
-- [`write-clear-readable-content`](.agents/skills/write-clear-readable-content) — create accurate, plain, inclusive, accessible content and documentation.
+- [`anti-slop`](.agents/skills/anti-slop) — prevent generic, fabricated, incomplete, or inaccessible AI-assisted product work.
+- [`color`](.agents/skills/color) — design and audit semantic color systems, themes, states, charts, and contrast.
+- [`typography`](.agents/skills/typography) — choose and implement readable, expressive, accessible typography systems.
+- [`craft`](.agents/skills/craft) — refine visual hierarchy, composition, spacing, interaction quality, and polish.
+- [`creative-web`](.agents/skills/creative-web) — build distinctive expressive web experiences and interactive narratives.
+- [`ux`](.agents/skills/ux) — design flows and interactions around user goals, comprehension, accessibility, and recovery.
+- [`seo`](.agents/skills/seo) — improve public-web discovery, structured content, and answer-engine visibility.
+- [`clean-code`](.agents/skills/clean-code) — implement and review correct, secure, testable, diagnosable code.
+- [`clear-writing`](.agents/skills/clear-writing) — create accurate, plain, inclusive, accessible content and documentation.
 
 ## Using a skill
 

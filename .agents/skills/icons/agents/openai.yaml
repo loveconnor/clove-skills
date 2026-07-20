@@ -1,0 +1,4 @@
+interface:
+  display_name: "Icons"
+  short_description: "Design and ship clean, accessible SVG icons"
+  default_prompt: "Use $icons to design and implement a clean, accessible icon set for this interface."
