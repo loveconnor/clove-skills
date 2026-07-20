@@ -1,0 +1,4 @@
+interface:
+  display_name: "Awardify"
+  short_description: "Turn existing sites into award-ready experiences"
+  default_prompt: "Use $awardify to transform this existing site into a distinctive, award-ready experience while preserving truth, usability, accessibility, and performance."

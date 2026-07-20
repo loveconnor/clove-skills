@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit"
+  short_description: "Return a read-only, evidence-backed audit"
+  default_prompt: "Use $audit to inspect this interface read-only and return a prioritized, evidence-backed audit without modifying any code, files, data, or external state."
