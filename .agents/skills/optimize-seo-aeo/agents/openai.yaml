@@ -1,0 +1,4 @@
+interface:
+  display_name: "Optimize SEO and AEO"
+  short_description: "Improve search and answer-engine discovery"
+  default_prompt: "Use $optimize-seo-aeo to improve this public content for search eligibility, answerability, trust, and measurable discovery."

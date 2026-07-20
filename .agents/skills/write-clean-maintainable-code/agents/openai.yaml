@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Clean Maintainable Code"
+  short_description: "Build correct, readable, operable software"
+  default_prompt: "Use $write-clean-maintainable-code to implement or review this change for correctness, clarity, testing, security, and operations."

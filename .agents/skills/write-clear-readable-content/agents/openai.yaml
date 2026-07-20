@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Natural Clear Content"
+  short_description: "Write natural, clear, usable content"
+  default_prompt: "Use $write-clear-readable-content to resolve ambiguity with precise clarifying questions, then make the response natural, clear, accurate, and appropriate for its reader."
