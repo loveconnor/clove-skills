@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research"
+  short_description: "Frame, verify, and synthesize research"
+  default_prompt: "Use $research to frame this question, find authoritative sources, verify claims, and synthesize the evidence."

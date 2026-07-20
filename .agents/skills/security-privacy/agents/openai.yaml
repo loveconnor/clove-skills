@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security & Privacy"
+  short_description: "Engineer secure, privacy-respecting systems"
+  default_prompt: "Use $security-privacy to model threats and privacy risks, select controls, verify them, and plan incident recovery."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Testing"
+  short_description: "Plan and verify risk-based software testing"
+  default_prompt: "Use $testing to design a risk-based test strategy and define credible release evidence for this change."

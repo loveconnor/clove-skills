@@ -1,0 +1,4 @@
+interface:
+  display_name: "Analytics"
+  short_description: "Design trustworthy product analytics"
+  default_prompt: "Use $analytics to define the event model, instrumentation, analysis, guardrails, and interpretation for this product question."

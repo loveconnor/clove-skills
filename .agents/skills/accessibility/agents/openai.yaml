@@ -1,0 +1,4 @@
+interface:
+  display_name: "Accessibility"
+  short_description: "Implement and verify accessible interfaces"
+  default_prompt: "Use $accessibility to implement and verify this interface against WCAG 2.2 AA and real assistive-use conditions."

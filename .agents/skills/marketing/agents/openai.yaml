@@ -1,0 +1,4 @@
+interface:
+  display_name: "Marketing"
+  short_description: "Build evidence-based marketing strategy"
+  default_prompt: "Use $marketing to develop evidence-based positioning, messaging, go-to-market, campaigns, lifecycle, and measurement."

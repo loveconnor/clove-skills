@@ -107,6 +107,42 @@ Use for every meaningful implementation, refactor, review, API, data model, depe
 
 Trigger it whenever code is created, changed, reviewed, or removed.
 
+### `$research`
+
+Use for question framing, search strategy, source selection, provenance, fact-checking, contradiction analysis, uncertainty, and evidence synthesis.
+
+Trigger it whenever a task requires multi-source research, a defensible factual recommendation, verification of disputed or time-sensitive claims, or an auditable research report.
+
+### `$accessibility`
+
+Use for WCAG 2.2 AA implementation and verification, semantic HTML, keyboard and focus behavior, screen readers, zoom and reflow, text spacing, forced colors, reduced motion, automated checks, and manual accessibility testing.
+
+Trigger it whenever a digital interface, flow, component, or content behavior is created, changed, audited, or claimed to be accessible.
+
+### `$testing`
+
+Use for risk-based unit, integration, contract, browser, end-to-end, visual-regression, accessibility, release, migration, rollback, and production verification.
+
+Trigger it whenever test strategy, test implementation, CI gates, release confidence, flaky tests, coverage, compatibility, or recovery evidence materially affects the result.
+
+### `$analytics`
+
+Use for product measurement questions, event taxonomies and contracts, instrumentation, identity and sessions, funnels, cohorts, retention, experiments, guardrails, data quality, and metric interpretation.
+
+Trigger it whenever product behavior will be measured, analytics code or schemas are changed, an experiment is designed or interpreted, or a metric is used to make a decision.
+
+### `$marketing`
+
+Use for market diagnosis, segmentation, ideal customer profiles, positioning, messaging and proof, offers, go-to-market plans, campaigns, lifecycle marketing, brand measurement, attribution, incrementality, and public marketing claims.
+
+Trigger it whenever marketing strategy, acquisition, lifecycle communication, campaign measurement, or claim substantiation is created, reviewed, or changed.
+
+### `$security-privacy`
+
+Use for threat modeling, abuse cases, authentication, sessions, federation, authorization, tenant isolation, personal data, privacy engineering, secrets, cryptography, dependency and supply-chain risk, security logging, vulnerability response, incidents, and recovery.
+
+Trigger it whenever a change affects trust boundaries, identity, permissions, sensitive or personal data, untrusted input, critical dependencies, security evidence, or incident and recovery behavior.
+
 ## Common task bundles
 
 Use these bundles as defaults, then adjust to the actual scope.
