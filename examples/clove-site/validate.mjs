@@ -7,8 +7,14 @@ const siteDirectory = dirname(fileURLToPath(import.meta.url));
 const repositoryDirectory = resolve(siteDirectory, "../..");
 const detailDirectory = resolve(siteDirectory, "skills");
 const sourceDirectory = resolve(repositoryDirectory, ".agents/skills");
-const indexPath = resolve(siteDirectory, "skills.html");
+const indexPath = resolve(siteDirectory, "index.html");
+const legacyCatalogPath = resolve(siteDirectory, "skills.html");
 const detailStylesPath = resolve(detailDirectory, "style.css");
+const faviconPath = resolve(siteDirectory, "favicon.svg");
+const robotsPath = resolve(siteDirectory, "robots.txt");
+const sitemapPath = resolve(siteDirectory, "sitemap.xml");
+const vercelConfigPath = resolve(siteDirectory, "vercel.json");
+const siteBaseUrl = "https://clove.connorlove.com";
 const publicSourceBaseUrl = "https://github.com/loveconnor/clove-skills/blob/main/.agents/skills";
 const agentsPath = resolve(repositoryDirectory, "AGENTS.md");
 const claudePath = resolve(repositoryDirectory, "CLAUDE.md");
@@ -24,6 +30,27 @@ const icons = {
 };
 
 const expectedCategories = new Set(["product", "content", "strategy", "engineering"]);
+const displayNames = new Map([
+  ["accessibility", "Accessibility"],
+  ["adhd", "ADHD"],
+  ["analytics", "Analytics"],
+  ["anti-slop", "Anti-Slop"],
+  ["audit", "Audit"],
+  ["awardify", "Awardify"],
+  ["clean-code", "Clean Code"],
+  ["clear-writing", "Clear Writing"],
+  ["color", "Color"],
+  ["craft", "Craft"],
+  ["creative-web", "Creative Web"],
+  ["icons", "Icons"],
+  ["marketing", "Marketing"],
+  ["research", "Research"],
+  ["security-privacy", "Security and Privacy"],
+  ["seo", "SEO"],
+  ["testing", "Testing"],
+  ["typography", "Typography"],
+  ["ux", "UX"],
+]);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -85,7 +112,12 @@ function validateLocalLinks(path, source) {
     if (/^(?:https?:|mailto:)/.test(href)) continue;
 
     const [relativePath, fragment] = href.split("#");
-    const targetPath = relativePath ? resolve(dirname(path), relativePath) : path;
+    let targetPath = relativePath ? resolve(dirname(path), relativePath) : path;
+    if (existsSync(targetPath) && lstatSync(targetPath).isDirectory()) {
+      targetPath = resolve(targetPath, "index.html");
+    } else if (!existsSync(targetPath) && existsSync(`${targetPath}.html`)) {
+      targetPath = `${targetPath}.html`;
+    }
     assert(existsSync(targetPath), `${path}: missing local link target ${href}`);
 
     if (fragment) {
@@ -96,6 +128,32 @@ function validateLocalLinks(path, source) {
       assert(targetIds.has(fragment), `${path}: missing fragment target ${href}`);
     }
   }
+}
+
+function collectJsonLd(source, label) {
+  const blocks = [...source.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(([, json]) => JSON.parse(json));
+  assert(blocks.length === 1, `${label}: expected one JSON-LD block, found ${blocks.length}`);
+  return blocks[0];
+}
+
+function validatePageMetadata(source, label, canonicalUrl, title, description) {
+  matchExactlyOnce(source, /<meta name="robots"/g, `${label} robots metadata`);
+  matchExactlyOnce(source, /<link rel="canonical"/g, `${label} canonical`);
+  matchExactlyOnce(source, /<meta property="og:title"/g, `${label} Open Graph title`);
+  matchExactlyOnce(source, /<meta property="og:description"/g, `${label} Open Graph description`);
+  matchExactlyOnce(source, /<meta property="og:url"/g, `${label} Open Graph URL`);
+  matchExactlyOnce(source, /<meta name="twitter:card"/g, `${label} Twitter card`);
+  matchExactlyOnce(source, /<meta name="twitter:title"/g, `${label} Twitter title`);
+  matchExactlyOnce(source, /<meta name="twitter:description"/g, `${label} Twitter description`);
+  assert(source.includes(`<link rel="canonical" href="${canonicalUrl}"`), `${label}: canonical URL is incorrect`);
+  assert(source.includes(`<meta property="og:title" content="${title}"`), `${label}: Open Graph title does not match the page title`);
+  assert(source.includes(`<meta property="og:description" content="${description}"`), `${label}: Open Graph description does not match the meta description`);
+  assert(source.includes(`<meta property="og:url" content="${canonicalUrl}"`), `${label}: Open Graph URL does not match the canonical`);
+  assert(source.includes(`<meta name="twitter:title" content="${title}"`), `${label}: Twitter title does not match the page title`);
+  assert(source.includes(`<meta name="twitter:description" content="${description}"`), `${label}: Twitter description does not match the meta description`);
+  assert(source.includes('content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"'), `${label}: robots metadata must allow full search previews`);
+  assert(!/<a\b[^>]*href="[^"]*\.html(?:[#?"])/.test(source), `${label}: public links must not expose .html`);
 }
 
 function parseColorVariables(source) {
@@ -150,6 +208,9 @@ function validateDetailPage(name) {
   const path = resolve(detailDirectory, `${name}.html`);
   assert(existsSync(path), `${name}: missing detail page`);
   const source = read(path);
+  const displayName = displayNames.get(name);
+  const pageLabel = `${displayName} Agent Skill`;
+  const canonicalUrl = `${siteBaseUrl}/skills/${name}`;
   const description = extract(source, /<meta name="description" content="([^"]+)"/, `${name} description`);
   const title = extract(source, /<title>\s*([^<]+?)\s*<\/title>/, `${name} title`);
 
@@ -160,10 +221,12 @@ function validateDetailPage(name) {
   matchExactlyOnce(source, /<h1>/g, `${name} h1`);
   matchExactlyOnce(source, /<nav class="nav shell" aria-label="Skill navigation">/g, `${name} navigation name`);
   matchExactlyOnce(source, /<span class="mark" aria-hidden="true">✦<\/span>/g, `${name} decorative mark`);
-  assert(source.includes(`${name} Agent Skill — Clove`), `${name}: title does not identify the public offer`);
+  assert(displayName, `${name}: missing public display name`);
+  assert(title === `${pageLabel} — Clove`, `${name}: title does not identify the public offer`);
   assert(title.length <= 60, `${name}: title is too long for a concise search result`);
   assert(description.length >= 70 && description.length <= 160, `${name}: description must be useful and concise`);
   assert(description.includes("Clove") && description.includes("Agent Skill"), `${name}: description must identify Clove and Agent Skills`);
+  assert(source.includes(`<span class="skill-name">${pageLabel}</span>`), `${name}: visible h1 must identify the skill`);
   assert(source.includes("Use this Agent Skill"), `${name}: opening description must orient direct visitors`);
   assert(source.includes("When to use this skill"), `${name}: usage heading must be explicit`);
   assert(source.includes("How this skill works"), `${name}: method heading must be explicit`);
@@ -182,10 +245,56 @@ function validateDetailPage(name) {
   assert(source.includes(`>${icons.left}All skills</a>`), `${name}: back link must use the left-arrow icon`);
   assert(source.includes(`Read the complete skill instructions ${icons.upRight}</a>`), `${name}: instructions link must use the northeast-arrow icon`);
   assert(source.includes(`Browse all 19 skills ${icons.right}</a>`), `${name}: continuation link must use the right-arrow icon`);
+  assert(source.includes('<time datetime="2026-07-20">July 20, 2026</time>'), `${name}: update date must remain visible and machine-readable`);
   validateIcons(source, name, 3);
+  validatePageMetadata(source, name, canonicalUrl, title, description);
+
+  const structuredData = collectJsonLd(source, name);
+  const webPage = structuredData["@graph"].find((entry) => entry["@type"] === "WebPage");
+  const breadcrumbs = structuredData["@graph"].find((entry) => entry["@type"] === "BreadcrumbList");
+  assert(webPage?.url === canonicalUrl, `${name}: structured WebPage URL does not match the canonical`);
+  assert(webPage?.name === title, `${name}: structured WebPage name does not match the title`);
+  assert(webPage?.description === description, `${name}: structured WebPage description does not match visible metadata`);
+  assert(breadcrumbs?.itemListElement?.length === 2, `${name}: structured breadcrumbs must contain home and the current skill`);
 
   validateLocalLinks(path, source);
   return { description, title };
+}
+
+function validateDiscoveryFiles(sourceSkillNames) {
+  assert(existsSync(faviconPath), "Missing favicon.svg");
+  assert(read(faviconPath).includes("<svg"), "favicon.svg must contain SVG markup");
+
+  const canonicalUrls = [
+    `${siteBaseUrl}/`,
+    ...sourceSkillNames.map((name) => `${siteBaseUrl}/skills/${name}`),
+  ].sort();
+  const sitemapSource = read(sitemapPath);
+  const sitemapUrls = [...sitemapSource.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url).sort();
+  assert(JSON.stringify(sitemapUrls) === JSON.stringify(canonicalUrls), "Sitemap URLs must match every canonical page exactly");
+  assert(!sitemapSource.includes(".html"), "Sitemap must contain only clean URLs");
+  assert((sitemapSource.match(/<lastmod>2026-07-20<\/lastmod>/g) ?? []).length === canonicalUrls.length, "Every sitemap URL needs an accurate lastmod value");
+
+  const robotsSource = read(robotsPath);
+  assert(robotsSource.includes(`Sitemap: ${siteBaseUrl}/sitemap.xml`), "robots.txt must advertise the canonical sitemap");
+  for (const crawler of ["OAI-SearchBot", "Claude-SearchBot", "Claude-User", "PerplexityBot"]) {
+    assert(robotsSource.includes(`User-agent: ${crawler}\nAllow: /`), `robots.txt must allow ${crawler}`);
+  }
+  for (const crawler of ["GPTBot", "ClaudeBot", "Google-Extended"]) {
+    assert(robotsSource.includes(`User-agent: ${crawler}\nDisallow: /`), `robots.txt must block ${crawler} training access`);
+  }
+
+  const vercelConfig = JSON.parse(read(vercelConfigPath));
+  assert(vercelConfig.cleanUrls === true, "Vercel must redirect .html URLs to extensionless URLs");
+  assert(vercelConfig.trailingSlash === false, "Vercel must redirect trailing-slash duplicates");
+  assert(!vercelConfig.rewrites, "Homepage rewrites would recreate duplicate homepage URLs");
+  assert(vercelConfig.redirects.some(({ source, destination, permanent }) => source === "/index" && destination === "/" && permanent), "Vercel must redirect /index to the canonical homepage");
+  assert(vercelConfig.redirects.some(({ source, destination, permanent }) => source === "/skills" && destination === "/" && permanent), "Vercel must redirect the former catalog URL to the canonical homepage");
+
+  const legacyCatalogSource = read(legacyCatalogPath);
+  assert(legacyCatalogSource.includes('<meta name="robots" content="noindex, follow">'), "Legacy catalog fallback must not be indexed");
+  assert(legacyCatalogSource.includes(`<link rel="canonical" href="${siteBaseUrl}/">`), "Legacy catalog fallback must canonicalize to the homepage");
+  assert(legacyCatalogSource.includes('<meta http-equiv="refresh" content="0;url=/">'), "Legacy catalog fallback must remain usable outside Vercel");
 }
 
 function validate() {
@@ -215,6 +324,7 @@ function validate() {
     JSON.stringify(cardNames) === JSON.stringify(sourceSkillNames),
     `Catalog skills do not match .agents/skills\nCatalog: ${cardNames.join(", ")}\nSource: ${sourceSkillNames.join(", ")}`,
   );
+  assert(JSON.stringify([...displayNames.keys()].sort()) === JSON.stringify(sourceSkillNames), "Public display names must cover every skill exactly once");
 
   assert(indexSource.includes(`Browse ${cards.length} skills`), "Hero skill count is stale");
   assert(indexSource.includes(`Showing all ${cards.length} skills.`), "Initial filter status count is stale");
@@ -233,7 +343,7 @@ function validate() {
   const detailMetadata = [];
   for (const card of cards) {
     assert(expectedCategories.has(card.category), `${card.name}: unknown category ${card.category}`);
-    assert(card.href === `skills/${card.name}.html`, `${card.name}: unexpected detail link ${card.href}`);
+    assert(card.href === `skills/${card.name}`, `${card.name}: unexpected detail link ${card.href}`);
     assert(
       card.markup.includes(`Read the ${card.name} skill ${icons.upRight}`),
       `${card.name}: link text must identify the destination and hide the decorative arrow`,
@@ -243,6 +353,17 @@ function validate() {
 
   assert(new Set(detailMetadata.map(({ title }) => title)).size === cards.length, "Detail page titles must be unique");
   assert(new Set(detailMetadata.map(({ description }) => description)).size === cards.length, "Detail page descriptions must be unique");
+
+  const indexDescription = extract(indexSource, /<meta\s+name="description"\s+content="([^"]+)"/s, "Catalog description");
+  const indexTitle = extract(indexSource, /<title>([^<]+)<\/title>/, "Catalog title");
+  validatePageMetadata(indexSource, "Catalog", `${siteBaseUrl}/`, indexTitle, indexDescription);
+  const indexStructuredData = collectJsonLd(indexSource, "Catalog");
+  const website = indexStructuredData["@graph"].find((entry) => entry["@type"] === "WebSite");
+  const collectionPage = indexStructuredData["@graph"].find((entry) => entry["@type"] === "CollectionPage");
+  assert(website?.url === `${siteBaseUrl}/` && website?.name === "Clove", "Catalog WebSite data must identify Clove at the canonical domain");
+  assert(collectionPage?.mainEntity?.numberOfItems === cards.length, "Catalog ItemList count must match the visible catalog");
+  assert(collectionPage?.mainEntity?.itemListElement?.length === cards.length, "Catalog ItemList must describe every visible skill");
+  validateDiscoveryFiles(sourceSkillNames);
 
   validateLocalLinks(indexPath, indexSource);
   validateIcons(indexSource, "Catalog", cards.length + 2);
@@ -288,7 +409,7 @@ function validate() {
     .filter((name) => extname(name) === ".html");
   assert(detailFiles.length === cards.length, "Detail page count does not match the catalog");
 
-  console.log(`Validated ${cards.length} skills, ${cards.length * 4 + 2} authored arrows, local links, semantics, script syntax, and contrast pairs.`);
+  console.log(`Validated ${cards.length} clean skill URLs, canonical metadata, structured data, discovery files, authored arrows, local links, semantics, script syntax, and contrast pairs.`);
 }
 
 validate();
