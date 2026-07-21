@@ -4,6 +4,25 @@ Clove is a platform-neutral library of reusable [Agent Skills](https://agentskil
 
 Each skill uses the open `SKILL.md` format. The canonical library lives in [`.agents/skills`](.agents/skills); vendor-specific files only provide discovery or interface compatibility and never change a skill's core instructions.
 
+## Install Clove in a project
+
+Run the initializer from the project you want to configure:
+
+```sh
+npx clove-skills init
+```
+
+Use the Up and Down arrow keys to move through the agent list, press Space to select or clear any agent, then press Enter to continue. You can select one agent or all of them. Clove installs the canonical `.agents/skills` library and only the compatibility files those agents need. Existing files with different content are kept and reported; use `--force` only when you intend to replace those conflicts.
+
+For a non-interactive setup or a different project directory:
+
+```sh
+npx clove-skills init --agent codex,claude
+npx clove-skills init ../my-project --agent cursor
+```
+
+Use `--agent all` to configure every supported agent, or `--dry-run` to inspect the changes without writing files. The CLI has no runtime dependencies and requires Node.js 18 or newer.
+
 ## Supported agents
 
 Support was checked against official documentation on July 20, 2026.

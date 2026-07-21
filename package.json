@@ -1,0 +1,42 @@
+{
+  "name": "clove-skills",
+  "version": "0.1.0",
+  "description": "Install Clove's product design and engineering Agent Skills into a project.",
+  "type": "module",
+  "bin": {
+    "clove-skills": "bin/clove-skills.js"
+  },
+  "files": [
+    ".agents/skills",
+    ".github/copilot-instructions.md",
+    "bin",
+    "src",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "GEMINI.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skills",
+    "codex",
+    "claude",
+    "cursor",
+    "gemini",
+    "copilot"
+  ],
+  "author": "Connor Love",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loveconnor/clove-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/loveconnor/clove-skills/issues"
+  },
+  "homepage": "https://github.com/loveconnor/clove-skills#readme"
+}

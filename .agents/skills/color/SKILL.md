@@ -21,6 +21,18 @@ rg -n '^## 14\.|^## 15\.|^## 16\.|^## 17\.|^## 18\.' references/research.md
 rg -n 'OKLCH|contrast|dark mode|forced|color vision|data visualization|token' references/research.md
 ```
 
+## Use the Clove Colors MCP
+
+Connect an MCP-capable client to `https://colors.connorlove.com/api/mcp` and use the server's read-only tools when they fit the task:
+
+- `search_palettes`: find original curated palettes by text, family, temperature, chroma, luminance, or context.
+- `generate_palette`: create a deterministic sRGB palette from a seed and versioned harmony recipe.
+- `build_theme`: turn 3–10 colors into ramps, semantic light and dark themes, and pair-level WCAG results.
+- `check_contrast`: evaluate supplied foreground/background pairs against WCAG 2.2 contrast thresholds.
+- `export_tokens`: return a built theme as CSS, Tailwind v4, DTCG 2025.10, or plain JSON.
+
+Treat tool output as implementation evidence, not complete design approval. Verify the rendered components, interaction states, themes, media, and user settings required by this skill. If the server is unavailable or the current agent cannot use MCP, continue with the workflow below and do not fabricate tool results.
+
 ## Workflow
 
 ### 1. Inventory
