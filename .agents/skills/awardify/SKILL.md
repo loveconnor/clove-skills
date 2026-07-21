@@ -1,6 +1,6 @@
 ---
 name: awardify
-description: Transform an existing website into a distinctive, award-ready experience by finding its ownable idea, strengthening content and task structure, establishing coherent art direction, creating one primary expressive lever and signature moment, implementing responsive and progressive enhancements, and verifying usability, accessibility, performance, resilience, and depth of finish. Use when Codex is asked to make a site award-winning, Awwwards-quality, CSS Design Awards-quality, more memorable, more art-directed, more creatively ambitious, or less generic through a substantial web redesign or polish implementation. Do not use for a general audit with no requested changes.
+description: Transform an existing website into a distinctive, award-ready experience by finding its ownable idea, strengthening content and task structure, establishing coherent art direction, creating one primary expressive lever and signature moment, implementing responsive and progressive enhancements, and verifying usability, accessibility, performance, resilience, and depth of finish. Use when the user asks to make a site award-winning, Awwwards-quality, CSS Design Awards-quality, more memorable, more art-directed, more creatively ambitious, or less generic through a substantial web redesign or polish implementation. Do not use for a general audit with no requested changes.
 ---
 
 # Awardify
@@ -420,4 +420,3 @@ Lead with what changed and why. Include:
 - before/after dimension assessment when useful;
 - assumptions, limits, browser support, maintenance cost, and unresolved risks;
 - a next step only when it materially advances the work.
-

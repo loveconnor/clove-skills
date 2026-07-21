@@ -1,1 +1,109 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A Clove skill for correct, readable, maintainable code."><link rel="stylesheet" href="style.css"><title>clean-code — Clove</title></head><body><nav class="nav shell"><a class="brand" href="../skills.html"><span class="mark">✦</span>clove</a><a class="back" href="../skills.html#skills">← All skills</a></nav><main><header class="hero shell"><p class="kicker">Engineering skill</p><h1>Write code that can be <em>owned.</em></h1><p class="lede">Implement and review correct, secure, testable, diagnosable code that a team can understand, verify, change, operate, and remove.</p><p class="callout">Correctness, safety, accessibility, compatibility, and user-visible behavior outrank elegance.</p></header><section class="layout shell"><aside class="aside-title"><h2>Keep the main path clear and the important risks visible.</h2><p>Maintainable code makes contracts, state, dependencies, failures, and ownership explicit.</p></aside><div class="content"><section class="section"><h3>Use it when</h3><p>You are creating, changing, reviewing, or removing application code, APIs, tests, configuration, data models, dependencies, error paths, or performance behavior.</p></section><section class="section"><h3>Working method</h3><ol><li>State the user or system outcome, non-goals, risks, and acceptance evidence.</li><li>Find the current owner and characterize unfamiliar behavior.</li><li>Define observable contracts, invariants, and state transitions.</li><li>Make the smallest clear change with behavior-focused tests.</li><li>Read the diff and run the project’s real checks before review.</li></ol></section><section class="section"><h3>Code rules</h3><ul><li>Name domain roles, ownership, units, and state clearly.</li><li>Keep I/O, side effects, validation, and errors visible.</li><li>Add abstractions only for real concepts or repeated knowledge.</li><li>Keep secrets and unnecessary personal data out of code and logs.</li></ul></section><a class="source" href="../.agents/skills/clean-code/SKILL.md">Read the complete skill source ↗</a></div></section></main><section class="next shell"><div class="next-inner"><h2>Generated code still needs a responsible owner.</h2><p>Use this skill whenever correctness, security, maintenance, and verification matter.</p><a href="../skills.html#skills">Explore the rest of the library →</a></div></section><footer><div class="shell">Clove skills for Codex agents</div></footer></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Use Clove’s clean-code Agent Skill to implement and review correct, readable, secure, testable, and maintainable software.">
+    <link rel="stylesheet" href="style.css">
+    <title>
+      clean-code Agent Skill — Clove
+    </title>
+  </head>
+  <body>
+    <nav class="nav shell" aria-label="Skill navigation">
+      <a class="brand" href="../skills.html"><span class="mark" aria-hidden="true">✦</span>clove</a>
+      <a class="back" href="../skills.html#skills"><svg class="icon icon--before icon--directional" aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="M12.75 8h-9.5m0 0L7 4.25M3.25 8 7 11.75"/></svg>All skills</a>
+    </nav>
+    <main>
+      <header class="hero shell">
+        <h1>
+          Write code that can be <em>owned.</em>
+        </h1>
+        <p class="lede">
+          Use this Agent Skill to implement and review code that a team can understand, verify, change, operate, and remove.
+        </p>
+        <p class="callout">
+          Correctness, safety, accessibility, compatibility, and user-visible behavior outrank elegance.
+        </p>
+      </header>
+      <section class="layout shell">
+        <aside class="aside-title">
+          <h2>
+            Keep the main path clear and the important risks visible.
+          </h2>
+          <p>
+            Maintainable code makes contracts, state, dependencies, failures, and ownership explicit.
+          </p>
+        </aside>
+        <div class="content">
+          <section class="section">
+            <h3>
+              When to use this skill
+            </h3>
+            <p>
+              You are creating, changing, reviewing, or removing application code, APIs, tests, configuration, data models, dependencies, error paths, or performance behavior.
+            </p>
+          </section>
+          <section class="section">
+            <h3>
+              How this skill works
+            </h3>
+            <ol>
+              <li>
+                State the user or system outcome, non-goals, risks, and acceptance evidence.
+              </li>
+              <li>
+                Find the current owner and characterize unfamiliar behavior.
+              </li>
+              <li>
+                Define observable contracts, invariants, and state transitions.
+              </li>
+              <li>
+                Make the smallest clear change with behavior-focused tests.
+              </li>
+              <li>
+                Read the diff and run the project’s real checks before review.
+              </li>
+            </ol>
+          </section>
+          <section class="section">
+            <h3>
+              Code rules
+            </h3>
+            <ul>
+              <li>
+                Name domain roles, ownership, units, and state clearly.
+              </li>
+              <li>
+                Keep I/O, side effects, validation, and errors visible.
+              </li>
+              <li>
+                Add abstractions only for real concepts or repeated knowledge.
+              </li>
+              <li>
+                Keep secrets and unnecessary personal data out of code and logs.
+              </li>
+            </ul>
+          </section>
+          <a class="source" href="https://github.com/loveconnor/clove-skills/blob/main/.agents/skills/clean-code/SKILL.md">Read the complete skill instructions <svg class="icon" aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="m4.25 11.75 7.5-7.5m-5.5 0h5.5v5.5"/></svg></a>
+        </div>
+      </section>
+      <section class="next shell">
+        <div class="next-inner">
+          <h2>
+            Generated code still needs a responsible owner.
+          </h2>
+          <p>
+            Use this skill whenever correctness, security, maintenance, and verification matter.
+          </p>
+          <a href="../skills.html#skills">Browse all 19 skills <svg class="icon icon--directional" aria-hidden="true" focusable="false" viewBox="0 0 16 16"><path d="M3.25 8h9.5m0 0L9 4.25M12.75 8 9 11.75"/></svg></a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="shell">
+        Clove — reusable Agent Skills
+      </div>
+    </footer>
+  </body>
+</html>

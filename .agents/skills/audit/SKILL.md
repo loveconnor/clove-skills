@@ -1,6 +1,6 @@
 ---
 name: audit
-description: "Audit websites, web applications, product interfaces, pages, flows, components, design systems, or implementation quality across purpose, workability, information architecture, visual hierarchy, readability, typography, color, interaction states, motion, responsive behavior, accessibility, performance, resilience, content, and maintainability. Use when Codex is asked to audit, evaluate, assess, review, critique, inspect, score, benchmark, QA, or identify problems and priorities in an existing interface. This skill is strictly read-only: never modify code, files, content, configuration, dependencies, tests, snapshots, data, or external state; return the audit in the response only."
+description: "Audit websites, web applications, product interfaces, pages, flows, components, design systems, or implementation quality across purpose, workability, information architecture, visual hierarchy, readability, typography, color, interaction states, motion, responsive behavior, accessibility, performance, resilience, content, and maintainability. Use when the user asks to audit, evaluate, assess, review, critique, inspect, score, benchmark, QA, or identify problems and priorities in an existing interface. This skill is strictly read-only: never modify code, files, content, configuration, dependencies, tests, snapshots, data, or external state; return the audit in the response only."
 ---
 
 # Audit
