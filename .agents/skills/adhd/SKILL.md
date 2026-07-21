@@ -21,12 +21,12 @@ Run this gate before spawning sub-agents.
 ## Preserve isolation and capacity
 
 - Use isolated sub-agents for divergent generation and focused deepening. Do not simulate all branches sequentially inside the coordinator.
-- Spawn each divergent branch with `fork_turns: "none"`. Give it only the problem, necessary user context, its frame, and the divergent prompt below.
+- Start each divergent branch without inherited conversation history. Give it only the problem, necessary user context, its frame, and the divergent prompt below.
 - Do not show a divergent branch another branch's prompt or output.
-- Use as much safe parallelism as current capacity permits. This environment normally allows the coordinator plus three child agents, so run five divergent frames in isolated batches when necessary.
+- Use as much safe parallelism as the current agent permits. When five divergent frames exceed available capacity, run them in isolated batches.
 - Create fresh isolated branches for later batches; do not reuse a branch that has seen a different frame.
 - Keep scoring and clustering in the coordinator. Spawn isolated focus branches for the three finalists when capacity permits.
-- Do not create user-owned Codex tasks or threads for internal branches.
+- Do not create user-visible tasks, threads, or conversations for internal branches.
 - If isolation cannot be maintained, say so and use a direct structured brainstorm instead of claiming to have run this workflow.
 
 ## Phase 1: Diverge without criticism
@@ -67,7 +67,7 @@ Group the surviving ideas into three to six clusters by their underlying mechani
 
 ### Deepen the top three
 
-Exclude traps and choose the three highest weighted ideas, using judgment to break near-ties and avoid three versions of the same mechanism. Spawn one isolated focus branch per finalist with `fork_turns: "none"`.
+Exclude traps and choose the three highest weighted ideas, using judgment to break near-ties and avoid three versions of the same mechanism. Start one isolated focus branch per finalist without inherited conversation history.
 
 Give each focus branch this instruction, followed by the problem, relevant context, and selected idea:
 
@@ -122,4 +122,4 @@ Commit to a recommendation after divergence. Do not make the user sort an undiff
 - Scale down only when the user's explicit invocation also requests a smaller run; preserve branch isolation at every size.
 - State the actual number of branches used. Do not claim five-way simultaneity when capacity required batches.
 
-This workflow adapts the open-source `adhd-agent` method described at <https://github.com/UditAkhourii/adhd> to Codex's sub-agent model and concurrency limits.
+This workflow adapts the open-source `adhd-agent` method described at <https://github.com/UditAkhourii/adhd> to coding agents that can provide isolated workers. When the host cannot provide that capability, use the direct structured-brainstorm fallback above.

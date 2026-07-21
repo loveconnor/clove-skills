@@ -6,6 +6,15 @@ Create product work that is specific, truthful, coherent, complete, accessible, 
 
 Use the repo-local skills in `.agents/skills` as the project's specialist knowledge. Load only the skills relevant to the task, then use their bundled research when deeper evidence or guidance is needed.
 
+## Agent compatibility
+
+These instructions and the skills in `.agents/skills` are platform-neutral. Apply them with any AI coding agent that supports `AGENTS.md` and the open Agent Skills format.
+
+- Treat names such as task, thread, conversation, sub-agent, branch, tool, and approval as capability roles, not requirements for one vendor's interface.
+- Use the current agent's equivalent feature when names differ.
+- If a workflow requests a capability the current agent does not provide, preserve the workflow's intent with the closest safe mechanism and state the limitation accurately.
+- Keep vendor-specific metadata optional. It may improve one host's interface, but it must not become required for loading or following a skill.
+
 ## Instruction order
 
 When instructions conflict, follow this order:
@@ -46,7 +55,7 @@ Without explicit invocation, load it only when all of these are true:
 
 Use it for unsettled architecture, public APIs, product direction, naming, schema design, creative concepts, or debugging without a known root cause. Do not use it for lookups, syntax questions, routine implementation, or bugs whose cause is already established.
 
-When loaded, the skill may spawn isolated sub-agents for divergent and focus work. Preserve branch isolation and use only the concurrency available in the current environment.
+When loaded, the skill may spawn isolated sub-agents for divergent and focus work. Preserve branch isolation and use only the concurrency available in the current environment. If the current agent cannot provide isolated parallel workers, follow the skill's documented fallback instead of simulating isolation.
 
 ### `$anti-slop`
 
